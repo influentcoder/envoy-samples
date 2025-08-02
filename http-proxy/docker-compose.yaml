@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  node-app:
+    image: node:24
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    command: ["server.js"]
+    depends_on:
+      - envoy
+    #network_mode: host
+    networks:
+      - app-network
+    ports:
+      - "8443:8443"
+
+  envoy:
+    image: envoyproxy/envoy:v1.35.0
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    #network_mode: host
+    networks:
+      - app-network
+    ports:
+      - "3128:3128"
+
+networks:
+  app-network:
+

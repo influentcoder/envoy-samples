@@ -17,5 +17,6 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = localhost
+DNS.2 = node-app
 EOF
 )
